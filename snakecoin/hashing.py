@@ -1,20 +1,15 @@
+from __future__ import absolute_import
+
 import hashlib
 
 from snakecoin.block import Block
 from snakecoin.transaction import Transaction
 
 
-_sha256_types = {
-  Block: _sha256_b,
-  Transaction: _sha256_t
-}
-
-
-def sha256(item):
-  hash_f = _sha256_types.get(type(item), None)
-  if hash_f is not None:
-    return hash_f(item)
-  raise TypeError('Invalid type for SHA256')
+def sha256(left, right):
+  load = str(left.hash) + str(right.hash)
+  load = load.encode('UTF-8')
+  return hashlib.sha256(load).hexdigest()
 
 
 def _sha256_b(block):
@@ -30,3 +25,9 @@ def _sha256_b(block):
 
 def _sha256_t(transaction):
   pass
+
+
+_sha256_types = {
+  Block: _sha256_b,
+  Transaction: _sha256_t
+}

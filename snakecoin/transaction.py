@@ -1,5 +1,6 @@
 import collections
 
+from snakecoin import trie
 from snakecoin import hashing
 
 
@@ -22,3 +23,4 @@ class Transaction:
   @property
   def hash(self):
     return hashing.sha256(self)
+  

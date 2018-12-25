@@ -1,8 +1,7 @@
 # -*- coding: future_fstrings -*-
 
-from snakecoin import merkle
+from snakecoin import trie
 from snakecoin import hashing
-
 
 class Block:
   __slots__ = (
@@ -24,7 +23,8 @@ class Block:
 
   @property
   def merkle_root(self):
-    return merkle.compute(self.transactions)
+    # TODO:
+    pass
 
   def __repr__(self):
     return f'<{self.__class__.__name__} (i:{self.index})'
